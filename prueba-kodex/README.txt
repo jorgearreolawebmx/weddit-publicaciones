@@ -2,7 +2,7 @@ WEDDIT STUDIO 0.11.1 — BASE WEB DE LA INVITACIÓN
 ======================================================
 
 Proyecto: Nicole XV
-Exportado: 2026-11-21T08:57:01.813Z
+Exportado: 2026-11-21T08:59:05.842Z
 
 CÓMO VERLA
 - Extrae el ZIP completo en una carpeta y haz doble clic en index.html. No necesita servidor ni conexión:
