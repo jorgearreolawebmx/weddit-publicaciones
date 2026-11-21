@@ -1,0 +1,173 @@
+/* Weddit Studio 0.11.1 — estilos de la invitación exportada */
+:root {
+  --iv-frame-width: 430px;   /* ancho máximo de la columna móvil */
+  --iv-outer-intro: #56392f;        /* márgenes exteriores durante la portada */
+  --iv-outer-invitation: #efe4d8;   /* márgenes exteriores de la invitación */
+  --iv-intro-time: .9s;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { background: var(--iv-outer-invitation); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { min-height: 100vh; background: var(--iv-outer-invitation); font-family: Arial, Helvetica, sans-serif; overflow-x: hidden; }
+body.iv-locked { overflow: hidden; }
+
+/* ---------- columna móvil: el contenido se desplaza; el fondo queda fijo DENTRO de la columna ---------- */
+#iv-invitation { display: block; }
+.iv-column { position: relative; display: grid; width: 100%; max-width: var(--iv-frame-width); min-height: 100vh; min-height: 100lvh; margin: 0 auto; }
+#iv-fixed-bg { grid-area: 1 / 1; position: -webkit-sticky; position: sticky; top: 0; align-self: start; z-index: 0; width: 100%; height: 100vh; height: 100lvh; overflow: hidden; pointer-events: none; }
+#iv-content { grid-area: 1 / 1; position: relative; z-index: 1; width: 100%; overflow: hidden; }
+
+/* ---------- mesas, capas y objetos (medidas en píxeles de diseño; la mesa completa se escala) ---------- */
+.iv-artboard { position: absolute; left: 0; top: 0; overflow: hidden; transform-origin: 0 0; }
+.iv-layer { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; }
+.iv-layer[hidden], .iv-obj[hidden] { display: none; }
+.iv-obj { position: absolute; transform-origin: 50% 50%; pointer-events: auto; }
+.iv-obj > svg { display: block; overflow: visible; }
+.iv-media { overflow: hidden; }
+/* Aviso en lugar del hueco en blanco cuando el navegador no sabe decodificar el video. */
+.iv-media[data-media-error="true"] video { display: none; }
+.iv-media-error { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: .7em; padding: 7%; box-sizing: border-box; text-align: center; background: #241d20; color: #f1d3d3;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-size: 20px; line-height: 1.4; }
+.iv-media-error strong { font-weight: 700; }
+.iv-media-error span { font-weight: 400; opacity: .82; font-size: .82em; }
+.iv-media > img, .iv-media > video { position: absolute; display: block; max-width: none; max-height: none; border: 0; }
+.iv-obj text { -webkit-user-select: none; user-select: none; }
+.iv-obj.iv-button { cursor: pointer; outline-offset: 4px; }
+.iv-obj.iv-button:focus-visible { outline: 2px solid #c89550; }
+.iv-button-label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 5px 12px; text-align: center; line-height: 1.12; pointer-events: none; overflow: hidden; }
+.iv-popup { z-index: 20; }
+
+/* ---------- botón de música ---------- */
+/* ---------- botones de biblioteca e interruptores ---------- */
+.iv-obj.iv-uibtn, .iv-obj.iv-switch { cursor: pointer; outline-offset: 4px; -webkit-tap-highlight-color: transparent; }
+.iv-obj.iv-uibtn.iv-ui-inert { cursor: default; }
+.iv-obj.iv-uibtn > svg, .iv-obj.iv-switch > svg { display: block; overflow: visible; position: absolute; inset: 0; }
+.iv-obj.iv-uibtn { transition: transform var(--iv-ui-ms, 180ms) ease, filter var(--iv-ui-ms, 180ms) ease; }
+.iv-obj.iv-uibtn .iv-uibtn-hover { opacity: 0; transition: opacity var(--iv-ui-ms, 180ms) ease; }
+.iv-obj.iv-uibtn:hover:not(.iv-ui-inert) { transform: scale(var(--iv-ui-hover-scale, 1.03)); filter: brightness(var(--iv-ui-hover-bright, 1.06)); }
+.iv-obj.iv-uibtn:hover:not(.iv-ui-inert) .iv-uibtn-hover { opacity: 1; }
+.iv-obj.iv-uibtn:active:not(.iv-ui-inert) { transform: scale(var(--iv-ui-press-scale, .97)) translateY(var(--iv-ui-press-y, 0)); filter: brightness(var(--iv-ui-press-bright, .94)); }
+.iv-obj.iv-uibtn:focus-visible, .iv-obj.iv-switch:focus-visible { outline: 2px solid #c89550; }
+.iv-obj.iv-switch .iv-switch-on { transition: opacity var(--iv-ui-ms, 260ms) ease; }
+.iv-obj.iv-switch .iv-ui-knob { transition: transform var(--iv-ui-ms, 260ms) cubic-bezier(.32, .72, .35, 1), opacity var(--iv-ui-ms, 260ms) ease; }
+.iv-obj.iv-switch svg.iv-no-anim .iv-switch-on, .iv-obj.iv-switch svg.iv-no-anim .iv-ui-knob { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .iv-obj.iv-uibtn, .iv-obj.iv-uibtn .iv-uibtn-hover, .iv-obj.iv-switch .iv-switch-on, .iv-obj.iv-switch .iv-ui-knob { transition: none; }
+}
+
+.iv-obj.iv-music { cursor: pointer; outline-offset: 4px; }
+.iv-obj.iv-music:focus-visible { outline: 2px solid #c89550; }
+.iv-obj.iv-music > svg { display: block; overflow: visible; }
+.iv-obj.iv-music[data-blocked="true"] { animation: iv-music-wait 2.4s ease-in-out infinite; }
+@keyframes iv-music-wait { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+.iv-music-volume { position: absolute; left: 0; margin: 0; accent-color: #c89550; cursor: pointer; }
+@media (prefers-reduced-motion: reduce) { .iv-obj.iv-music[data-blocked="true"] { animation: none; } }
+
+/* ---------- portada (INTRO) ---------- */
+#iv-intro { position: fixed; left: 0; top: 0; right: 0; bottom: 0; z-index: 10; display: flex; justify-content: center; background: var(--iv-outer-intro); cursor: pointer; outline: 0;
+  transition: opacity var(--iv-intro-time) var(--iv-intro-ease, ease), transform var(--iv-intro-time) var(--iv-intro-ease, ease), filter var(--iv-intro-time) var(--iv-intro-ease, ease), clip-path var(--iv-intro-time) var(--iv-intro-ease, ease), visibility 0s linear var(--iv-intro-time); }
+#iv-intro-frame { position: relative; width: 100%; max-width: var(--iv-frame-width); height: 100%; overflow: hidden; }
+body.iv-opened #iv-intro { opacity: 0; visibility: hidden; pointer-events: none; }
+body.iv-opened.iv-t-slide #iv-intro { opacity: 1; transform: translateY(calc(-100% * var(--iv-intro-power, 1))); }
+body.iv-opened.iv-t-zoom #iv-intro { transform: scale(calc(1 + .12 * var(--iv-intro-power, 1))); }
+body.iv-opened.iv-t-blur #iv-intro { opacity: 0; filter: blur(calc(18px * var(--iv-intro-power, 1))); transform: scale(calc(1 + .04 * var(--iv-intro-power, 1))); }
+body.iv-opened.iv-t-wipe #iv-intro { opacity: 1; clip-path: inset(0 0 100% 0); }
+body.iv-opened.iv-t-slide-left #iv-intro { opacity: 1; transform: translateX(calc(-100% * var(--iv-intro-power, 1))); }
+/* ---------- 0.9.3: transiciones nuevas y dirección configurable ---------- */
+body.iv-opened.iv-t-dissolve #iv-intro { opacity: 0; filter: saturate(calc(1 - .6 * var(--iv-intro-power, 1))) brightness(calc(1 + .35 * var(--iv-intro-power, 1))); }
+body.iv-opened.iv-t-zoom-in #iv-intro { opacity: 0; transform: scale(calc(1 - .28 * var(--iv-intro-power, 1))); }
+body.iv-opened.iv-t-expand #iv-intro { opacity: 0; clip-path: circle(calc(0% + 0px) at 50% 50%); }
+#iv-intro { clip-path: circle(150% at 50% 50%); }
+body.iv-t-wipe.iv-dir-down.iv-opened #iv-intro { clip-path: inset(100% 0 0 0); }
+body.iv-t-wipe.iv-dir-left.iv-opened #iv-intro { clip-path: inset(0 100% 0 0); }
+body.iv-t-wipe.iv-dir-right.iv-opened #iv-intro { clip-path: inset(0 0 0 100%); }
+body.iv-t-slide.iv-dir-down.iv-opened #iv-intro { transform: translateY(calc(100% * var(--iv-intro-power, 1))); }
+body.iv-t-slide.iv-dir-left.iv-opened #iv-intro { transform: translateX(calc(-100% * var(--iv-intro-power, 1))); }
+body.iv-t-slide.iv-dir-right.iv-opened #iv-intro { transform: translateX(calc(100% * var(--iv-intro-power, 1))); }
+/* El botón de apertura se oculta mientras no le toque aparecer, y no estorba al pulsar la portada. */
+.iv-obj[data-intro-hidden="true"] { opacity: 0; pointer-events: none; transition: opacity .32s ease; }
+.iv-obj[data-intro-shown="true"] { transition: opacity .32s ease; }
+.iv-obj[data-intro-disabled="true"] { cursor: default; }
+/* Entrar sin ver la animación: una pastilla discreta abajo al centro, que no compita con la escena. */
+.iv-intro-skip {
+  position: absolute; left: 50%; bottom: 7%; transform: translateX(-50%); z-index: 30; cursor: pointer;
+  max-width: 78%; text-align: center;
+  background: rgba(255, 255, 255, .82); color: #4a3a2c; border: 1px solid rgba(0, 0, 0, .08);
+  border-radius: 999px; padding: 10px 22px; font-size: 12px; line-height: 1.3; letter-spacing: .06em;
+  text-transform: uppercase;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .14);
+  backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+}
+.iv-intro-skip:hover { background: rgba(255, 255, 255, .96); }
+@media (prefers-reduced-motion: no-preference) { .iv-intro-skip { transition: background .2s ease; } }
+body.iv-no-intro #iv-intro { display: none; }
+@media (prefers-reduced-motion: reduce) { #iv-intro { transition-duration: .01s; } }
+
+/* --- Galería (0.11) --- */
+[data-galeria] { position: relative; touch-action: pan-y; cursor: zoom-in; }
+.iv-gal-pista { position: absolute; inset: 0; }
+.iv-gal-foto { position: absolute; inset: 0; }
+.iv-gal-foto img { width: 100%; height: 100%; display: block; }
+.iv-gal-pie { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 14px 10px;
+  font: 13px/1.4 Georgia, serif; color: #fff; text-align: center;
+  background: linear-gradient(transparent, rgba(0,0,0,.62)); }
+
+/* deslizar: cada foto lleva su posición en el propio elemento, así no hay límite de cuántas */
+.iv-gal-deslizar { transform: translateX(calc(-100% * var(--iv-gal-i, 0))); transition: transform .5s cubic-bezier(.4,0,.2,1); }
+
+/* las demás transiciones apilan y cambian la opacidad o la escala */
+.iv-gal-fundido .iv-gal-foto, .iv-gal-acercar .iv-gal-foto, .iv-gal-apilar .iv-gal-foto {
+  opacity: 0; transition: opacity .55s ease, transform .55s ease; }
+.iv-gal-fundido .iv-gal-foto.es-actual, .iv-gal-acercar .iv-gal-foto.es-actual,
+.iv-gal-apilar .iv-gal-foto.es-actual { opacity: 1; }
+.iv-gal-acercar .iv-gal-foto { transform: scale(1.08); }
+.iv-gal-acercar .iv-gal-foto.es-actual { transform: scale(1); }
+.iv-gal-apilar .iv-gal-foto { transform: translateY(14px); }
+.iv-gal-apilar .iv-gal-foto.es-actual { transform: translateY(0); }
+
+.iv-gal-puntos { position: absolute; left: 0; right: 0; bottom: 9px; display: flex; gap: 6px;
+  justify-content: center; z-index: 3; }
+.iv-gal-puntos button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%;
+  opacity: .42; cursor: pointer; transition: opacity .25s, transform .25s; }
+.iv-gal-puntos button.es-actual { opacity: 1; transform: scale(1.3); }
+.iv-gal-flecha { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+  width: 36px; height: 54px; border: 0; background: rgba(0,0,0,.22); border-radius: 6px;
+  font-size: 30px; line-height: 1; cursor: pointer; }
+.iv-gal-prev { left: 4px; } .iv-gal-next { right: 4px; }
+.iv-gal-vacio { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: #2a2f36; color: #8d969f; font: 14px/1.4 Arial, sans-serif; text-align: center; }
+
+.iv-gal-grande { position: fixed; inset: 0; z-index: 9999; background: rgba(8,8,10,.94);
+  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; padding: 18px; }
+.iv-gal-grande img { max-width: 100%; max-height: 82vh; object-fit: contain; }
+.iv-gal-grande-pie { margin: 0; color: #e7e2da; font: 14px/1.5 Georgia, serif; text-align: center; max-width: 620px; }
+.iv-gal-grande .iv-gal-flecha { color: #fff; width: 44px; height: 66px; font-size: 38px; }
+.iv-gal-cerrar { position: absolute; top: 12px; right: 14px; width: 40px; height: 40px; border: 0;
+  border-radius: 50%; background: rgba(255,255,255,.12); color: #fff; font-size: 26px; line-height: 1; cursor: pointer; }
+body.iv-gal-abierta { overflow: hidden; }
+
+/* --- Confirmación de asistencia (0.11) ---
+   Las medidas van en el espacio del diseño (1080 px de ancho), no en píxeles de pantalla: el
+   bloque vive dentro del lienzo, que la invitación reduce hasta el ancho del teléfono. Con
+   tamaños de pantalla se veía diminuto. */
+.iv-rsvp { box-sizing: border-box; width: 100%; padding: 60px 50px; text-align: center;
+  font-family: Georgia, "Times New Roman", serif; color: inherit; }
+.iv-rsvp-nombre { margin: 0 0 10px; font-size: 54px; line-height: 1.2; }
+.iv-rsvp-pases { margin: 0 0 32px; font-size: 32px; opacity: .78; }
+.iv-rsvp-estado { margin: 0 0 28px; font-size: 32px; opacity: .92; }
+.iv-rsvp-fila { display: flex; align-items: center; justify-content: center; gap: 22px; margin-bottom: 32px;
+  font-size: 32px; flex-wrap: wrap; }
+.iv-rsvp-fila select { font: inherit; font-size: 34px; padding: 12px 20px; border-radius: 14px;
+  border: 2px solid currentColor; background: transparent; color: inherit; }
+.iv-rsvp-botones { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; }
+.iv-rsvp-botones button { font: inherit; font-size: 26px; letter-spacing: .09em; text-transform: uppercase;
+  padding: 22px 42px; border-radius: 999px; border: 2px solid currentColor; cursor: pointer;
+  background: transparent; color: inherit; }
+.iv-rsvp-si { background: rgba(255,255,255,.14); }
+.iv-rsvp-botones button:disabled { opacity: .5; cursor: default; }
+.iv-rsvp-msg { margin: 30px 0 0; font-size: 30px; line-height: 1.5; opacity: .88; }
+.iv-rsvp-msg.is-ok { opacity: 1; }
+.iv-rsvp-msg.is-error { color: #e08a82; opacity: 1; }
+.iv-rsvp-wa { display: inline-block; margin-top: 16px; color: inherit; }

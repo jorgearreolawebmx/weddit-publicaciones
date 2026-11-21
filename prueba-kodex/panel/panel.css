@@ -1,0 +1,46 @@
+/* Panel de invitados — Weddit Studio 0.11.1 */
+.kx { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #e8e2d8; }
+.kx-gate { max-width: 360px; margin: 14vh auto; padding: 26px 24px; background: #1b2026; border: 1px solid #2c333c; border-radius: 14px; }
+.kx-gate h1 { font-size: 19px; margin: 0 0 6px; font-weight: 600; }
+.kx-gate p { font-size: 13px; color: #9aa3ad; margin: 0 0 16px; line-height: 1.5; }
+.kx input, .kx select, .kx textarea { width: 100%; box-sizing: border-box; padding: 9px 11px; border-radius: 8px;
+  border: 1px solid #2c333c; background: #12161b; color: #e8e2d8; font: inherit; font-size: 14px; }
+.kx button { padding: 9px 16px; border-radius: 8px; border: 1px solid #2c333c; background: #232a32; color: #e8e2d8;
+  font: inherit; font-size: 13.5px; cursor: pointer; }
+.kx button.pri { background: #c9a227; border-color: #c9a227; color: #1a1408; font-weight: 600; }
+.kx button:hover { filter: brightness(1.12); }
+.kx-err { color: #e2706a; font-size: 13px; margin: 10px 0 0; min-height: 18px; }
+.kx-ok { color: #6fbf8e; }
+.kx-wrap { max-width: 980px; margin: 0 auto; padding: 22px 16px 60px; }
+.kx-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+.kx-top h1 { font-size: 20px; margin: 0; font-weight: 600; }
+.kx-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 20px; }
+.kx-stat { background: #1b2026; border: 1px solid #2c333c; border-radius: 12px; padding: 14px; }
+.kx-stat b { display: block; font-size: 25px; font-weight: 600; line-height: 1.1; }
+.kx-stat span { font-size: 11.5px; color: #9aa3ad; text-transform: uppercase; letter-spacing: .06em; }
+.kx-card { background: #1b2026; border: 1px solid #2c333c; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+.kx-card h2 { font-size: 15px; margin: 0 0 12px; font-weight: 600; }
+.kx-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; align-items: end; }
+.kx-form label { font-size: 12px; color: #9aa3ad; display: block; }
+.kx-form label span { display: block; margin-bottom: 4px; }
+.kx-tools { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+.kx-tools input[type="search"] { flex: 1 1 200px; }
+.kx-tools select { flex: 0 0 170px; }
+table.kx-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.kx-table th { text-align: left; font-size: 11.5px; text-transform: uppercase; letter-spacing: .05em;
+  color: #9aa3ad; padding: 8px 10px; border-bottom: 1px solid #2c333c; font-weight: 600; }
+.kx-table td { padding: 9px 10px; border-bottom: 1px solid #232a32; vertical-align: top; }
+.kx-pill { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 11.5px; }
+.kx-pill.p { background: #3a3220; color: #e0c278; }
+.kx-pill.c { background: #1f3a2b; color: #7fd4a1; }
+.kx-pill.n { background: #3a2323; color: #e58f89; }
+.kx-link { display: flex; gap: 6px; align-items: center; }
+.kx-link input { font-size: 11.5px; padding: 5px 8px; }
+.kx-row-acts { display: flex; gap: 6px; flex-wrap: wrap; }
+.kx-row-acts button { padding: 5px 10px; font-size: 12px; }
+@media (max-width: 620px) {
+  .kx-table thead { display: none; }
+  .kx-table tr { display: block; border-bottom: 1px solid #2c333c; padding: 8px 0; }
+  .kx-table td { display: flex; justify-content: space-between; gap: 12px; border: 0; padding: 4px 2px; }
+  .kx-table td::before { content: attr(data-th); color: #9aa3ad; font-size: 11.5px; text-transform: uppercase; }
+}
